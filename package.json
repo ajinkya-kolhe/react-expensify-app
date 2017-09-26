@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --config=jest.config.json",
     "serve": "live-server public",
-    "build": "webpack",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server"
   },
   "author": "Ajinkya Kolhe",
