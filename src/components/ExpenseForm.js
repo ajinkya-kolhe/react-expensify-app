@@ -2,8 +2,6 @@ import React from 'react';
 import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 
-import 'react-dates/lib/css/_datepicker.css';
-
 export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +41,7 @@ export default class ExpenseForm extends React.Component {
     if(!this.state.description || !this.state.amount) {
       this.setState(() => ({ error: 'Please provide description and amount.'}));
     } else {
-      this.setState(() => ({ error: undefined }));
+      this.setState(() => ({ error: '' }));
       this.props.onSubmit({
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
