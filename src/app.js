@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
 
@@ -14,10 +14,6 @@ import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
 
-const expenseOne = store.dispatch(addExpense({ description: 'Water bill', amount: 4500, createdAt: 1506294414255 }));
-const expenseTwo = store.dispatch(addExpense({ description: 'Gas bill', createdAt: 1000 }));
-const expenseThree = store.dispatch(addExpense({ description: 'Rent', amount: 109500, createdAt: 989898989 }));
-
 const visibleExpenses = getVisibleExpenses(store.getState().expenses, store.getState().filters);
 
 const appTemplate = (
@@ -26,4 +22,8 @@ const appTemplate = (
   </Provider>
 );
 
-ReactDOM.render(appTemplate, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(appTemplate, document.getElementById('app'));
+});
