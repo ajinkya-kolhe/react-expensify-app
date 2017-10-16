@@ -25,6 +25,11 @@ export class ExpenseListFilters extends React.Component {
       this.props.sortByAmount();
     }
   };
+  clearFilters = () => {
+    this.props.setStartDate(undefined);
+    this.props.setEndDate(undefined);
+    this.props.setTextFilter('');
+  };
   render() {
     return (
       <div className="content-container">
@@ -59,6 +64,11 @@ export class ExpenseListFilters extends React.Component {
               numberOfMonths={1}
               isOutsideRange={() => false}
             />
+          </div>
+          <div className="input-group__item">
+            <button className="button button--filter" onClick={this.clearFilters}>
+              Clear Filters
+            </button>
           </div>
         </div>
     </div>);

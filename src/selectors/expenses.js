@@ -16,3 +16,9 @@ export default (expenses, { text, sortBy, startDate, endDate}) => {
     }
   });
 }
+
+export const selectFilteredExpenses = (allExpenses, visibleExpenses) => {
+  return allExpenses.filter((expense) => {
+    return visibleExpenses.indexOf(expense) == -1;
+  })
+}
