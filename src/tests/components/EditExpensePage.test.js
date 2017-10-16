@@ -2,13 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { EditExpensePage } from '../../components/EditExpensePage';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import expenses from '../fixtures/expenses';
 
-let wrapper, history, startEditExpense, startRemoveExpense;
+let wrapper, history, startEditExpense, startRemoveExpense, openConfirmationModal, closeConfirmationModal;
 
 beforeEach(() => {
   startEditExpense = jest.fn();
   startRemoveExpense = jest.fn();
+  openConfirmationModal = jest.fn();
+  closeConfirmationModal = jest.fn();
   history = { push: jest.fn() };
   wrapper = shallow(
     <EditExpensePage
@@ -31,7 +34,7 @@ test('should handle startEditExpense', () => {
 });
 
 test('should handle startRemoveExpense', () => {
-  wrapper.find('button').simulate('click');
+  wrapper.find('ConfirmationModal').prop('onRemove')();
   expect(history.push).toHaveBeenLastCalledWith('/');
   expect(startRemoveExpense).toHaveBeenLastCalledWith({ id: expenses[1].id} );
 });

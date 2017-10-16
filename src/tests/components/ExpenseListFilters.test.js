@@ -73,3 +73,11 @@ test('should handle date focus on change', () => {
   wrapper.find('DateRangePicker').prop('onFocusChange')(calendarFocused);
   expect(wrapper.state('calendarFocused')).toBe(calendarFocused);
 });
+
+test('should clear fliters', () => {
+  wrapper.setProps({ filters: altfilters });
+  wrapper.find('button').simulate('click');
+  expect(setStartDate).toHaveBeenCalled();
+  expect(setEndDate).toHaveBeenCalled();
+  expect(setTextFilter).toHaveBeenCalled();
+});

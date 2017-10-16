@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import expenses from '../fixtures/expenses';
-import selectExpenses from '../../selectors/expenses';
+import selectExpenses, { selectFilteredExpenses } from '../../selectors/expenses';
 
 test('should filter by text value', () => {
   const filters= {
@@ -56,4 +56,16 @@ test('should sort by amount', () => {
   };
   const result = selectExpenses(expenses, filters);
   expect(result).toEqual([expenses[1], expenses[2], expenses[0]]);
+});
+
+test('should select filtered expenses', () => {
+  const filters= {
+    text: 'e',
+    sortBy: 'date',
+    startDate: undefined,
+    endDate: undefined
+  };
+  const visibleExpenses = selectExpenses(expenses, filters);
+  const result = selectFilteredExpenses(expenses, visibleExpenses);
+  expect(result).toEqual([expenses[0]]);
 });
